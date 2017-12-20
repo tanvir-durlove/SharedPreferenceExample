@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String Deposit = "depositkey";
 
-    private String balance;
+    private String balance = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,9 @@ public class MainActivity extends AppCompatActivity {
         withdraw.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-
-                num2 = Double.parseDouble(number_value.getText().toString());
                 if (num1 > num2) {
                     try {
+                        num2 = Double.parseDouble(number_value.getText().toString());
                         // Storing string
                         balance = String.valueOf(num1 - num2);
                         editor.putString(Deposit, balance);
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText
                             (MainActivity.this, "Sorry You don't have sufficient balance for withdraw", Toast.LENGTH_SHORT)
                             .show();
-                } else if (number_value.length() > 0) {
+                } else if (number_value != null && number_value.length() == 0) {
                     Toast.makeText
                             (MainActivity.this, "Please Input You're Amount", Toast.LENGTH_SHORT)
                             .show();
