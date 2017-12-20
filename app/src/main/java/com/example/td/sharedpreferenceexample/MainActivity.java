@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                         Toast.makeText(MainActivity.this, "You Successfully Deposit :" + num2, Toast.LENGTH_LONG).show();
 
-                        num1 = Double.parseDouble(balance);
                     } catch (Exception e) {
                     }
                 } else {
@@ -54,30 +53,28 @@ public class MainActivity extends AppCompatActivity {
                             (MainActivity.this, "Please Input You're Amount", Toast.LENGTH_SHORT)
                             .show();
                 }
+                num1 = Double.parseDouble(balance);
             }
         });
 
         withdraw.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+
+                num2 = Double.parseDouble(number_value.getText().toString());
+
                 if (num1 > num2) {
-                    try {
-                        num2 = Double.parseDouble(number_value.getText().toString());
-                        // Storing string
-                        balance = String.valueOf(num1 - num2);
-                        editor.putString(Deposit, balance);
-                        editor.apply();
-                        Toast.makeText(MainActivity.this, "You Successfully Withdraw :" + num2, Toast.LENGTH_LONG).show();
-                        num1 = Double.parseDouble(balance);
-                    } catch (Exception e) {
-                    }
-                } else if (num2 > num1) {
+                    // Storing string
+                    balance = String.valueOf(num1 - num2);
+                    editor.putString(Deposit, balance);
+                    editor.apply();
+
+                    Toast.makeText(MainActivity.this, "You Successfully Withdraw :" + num2, Toast.LENGTH_LONG).show();
+                    num1 = Double.parseDouble(balance);
+                }
+                else if (num2>num1){
                     Toast.makeText
                             (MainActivity.this, "Sorry You don't have sufficient balance for withdraw", Toast.LENGTH_SHORT)
-                            .show();
-                } else if (number_value != null && number_value.length() == 0) {
-                    Toast.makeText
-                            (MainActivity.this, "Please Input You're Amount", Toast.LENGTH_SHORT)
                             .show();
                 }
             }
